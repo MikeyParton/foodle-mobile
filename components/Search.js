@@ -1,14 +1,6 @@
 import React from 'react'
-import {
-  StyleSheet,
-  Text,
-  View,
-  Button,
-  ScrollView,
-  FlatList,
-  StatusBar,
-  TextInput
-} from 'react-native'
+import { StyleSheet, Text, View, Button, ScrollView, StatusBar, TextInput } from 'react-native'
+import IngredientsList from '../containers/IngredientsList'
 
 const styles = StyleSheet.create({
   header: {
@@ -25,14 +17,6 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#D9E2DE'
-  },
-  content: {
-    backgroundColor: 'white'
-  },
-  item: {
-    paddingTop: 10,
-    paddingBottom: 10,
-    fontSize: 18
   }
 })
 
@@ -78,12 +62,7 @@ class Search extends React.Component {
         </View>
         <TextInput value={query} onChange={this.handleChange} placeholder="Search for Something" />
         <Text style={styles.heading}>INGREDIENTS</Text>
-        <FlatList
-          contentContainerStyle={styles.content}
-          data={ingredients}
-          renderItem={({item}) => <Text style={styles.item}>{item.name}</Text>}
-          keyExtractor={(item) => item.id}
-        />
+        <IngredientsList />
       </View>
     )
   }
