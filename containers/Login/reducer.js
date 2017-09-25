@@ -5,11 +5,10 @@ const defaultState = {
 }
 
 const loggedIn = (state, action) => {
-  console.log('yay')
+  return { ...state, currentUser: action.user }
 }
 
 const login = (state = defaultState, action) => {
-  console.log('in this part')
   switch (action.type) {
     case LOGGED_IN:
       return loggedIn(state, action)

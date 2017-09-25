@@ -7,7 +7,7 @@ class Login extends Component {
     //   permissions: ['public_profile']
     // })
     // if (type === 'success') {
-      const token = 'EAACEdEose0cBAPRwk8yY22TsWcaRPanG52j8MO2NCSdDyGy1KbRaDZCwUniIafbZCUPb9cS5ZB0zXQv66iH1LZAmYxzqrrWG88spAm5NO2d6uBZCyXrniDKIxytdYnN8Vg7NbMMY4NsZCkQHDsWEFXcNOCW7aeoJK8qwwXXrTh9LmGjMrl9EZCuCPDZCxHq3rq85Ncf21XncaAZDZD'
+      const token = 'EAACEdEose0cBAMssGaEMPtynRVK7izJyIZBs9KZAmMLxf7SAVz3WiklAskaRXZA2Nk0c2zyTVJIIVv2BwsALGDMfHqQE1NIZCj5ZCVqzdk3W2eqZCAfx9eLNH34Y3DkMebMOEojMQUX9jQkLbbDoud5Dl2dMVTWecSgdKWW0jFRhsp8ZBHKpJMbuHiqLP2s04RwwITwQYLoYAZDZD'
       const response = await this.props.mutate({ variables: { token }})
       this.props.loggedIn(response.data.facebook_login)
     // }
@@ -21,6 +21,11 @@ class Login extends Component {
           title="Sign In"
           onPress={() => this.loginWithFacebook() }
         />
+        {
+          this.props.currentUser && <Text>
+            Welcome { this.props.currentUser.first_name }
+          </Text>
+        }
       </View>
     )
   }
