@@ -10,9 +10,7 @@ networkInterface.use([{
     if (!req.options.headers) {
       req.options.headers = {}
     }
-
     const token = await AsyncStorage.getItem('foodle_token')
-    console.log('foodle_token', token)
     req.options.headers.authorization = token ? `Bearer ${token}` : null
     next()
   }

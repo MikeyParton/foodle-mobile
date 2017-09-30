@@ -1,8 +1,16 @@
-import { View, Text, Button, Alert } from 'react-native'
+import { View, Text, TouchableOpacity, Alert, ActivityIndicator, Animated } from 'react-native'
 import React, { Component } from 'react'
+import Icon from 'react-native-vector-icons/FontAwesome'
+import Spinner from './Spinner'
+import { Screen, Heading, ButtonText, LoginButton, SubHeading } from './ui'
 
 class Login extends Component {
+  state = {
+    loggingIn: false
+  }
+
   async loginWithFacebook() {
+    this.loggingIn()
     // const { type, token } = await Expo.Facebook.logInWithReadPermissionsAsync('148927799035525', {
     //   permissions: ['public_profile']
     // })
@@ -16,10 +24,16 @@ class Login extends Component {
       } else {
         this.props.loggedIn(user)
       }
+      return
     // }
   }
 
+  loggingIn() {
+    this.setState({ loggingIn: true })
+  }
+
   loginError() {
+    this.setState({ loggingIn: false })
     Alert.alert(
       'Sign In Error',
       'There was an error signing in. Please try again.',
@@ -29,19 +43,25 @@ class Login extends Component {
   }
 
   render () {
+    const { loggingIn } = this.state
+    let icon
     return (
-      <View>
-        <Text>Welcome to the Facebook SDK for React Native!</Text>
-        <Button
-          title="Sign In"
-          onPress={() => this.loginWithFacebook() }
-        />
+      <Screen>
+        <Heading>Foodle</Heading>
+        <SubHeading>Eat Right</SubHeading>
+        <LoginButton disabled={loggingIn} onPress={() => this.loginWithFacebook()}>
+          {
+            loggingIn
+              ? <Spinner color={"white"}/>
+              : <Icon name="facebook" color="white"/>
+          }
+          <ButtonText>Login with Facebook</ButtonText>
+        </LoginButton>
         {
-          this.props.currentUser && <Text>
-            Welcome { this.props.currentUser.first_name }
-          </Text>
+          this.props.currentUser &&
+            <Text>Welcome { this.props.currentUser.first_name }</Text>
         }
-      </View>
+      </Screen>
     )
   }
 }
