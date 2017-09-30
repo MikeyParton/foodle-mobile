@@ -1,3 +1,4 @@
+import { AsyncStorage } from 'react-native'
 import { LOGGED_IN } from './constants'
 
 const defaultState = {
@@ -5,7 +6,13 @@ const defaultState = {
 }
 
 const loggedIn = (state, action) => {
-  return { ...state, currentUser: action.user }
+  const currentUser = action.user
+  try {
+    AsyncStorage.setItem('foodle_token', currentUser.token)
+  } catch (error) {
+    console.log('error stroring token', error)
+  }
+  return { ...state, currentUser }
 }
 
 const login = (state = defaultState, action) => {

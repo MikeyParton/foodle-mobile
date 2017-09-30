@@ -1,1 +1,2 @@
+export const FOODLE_AUTH_TOKEN = 'FOODLE_AUTH_TOKEN'
 export const LOGGED_IN = 'LOGGED_IN'

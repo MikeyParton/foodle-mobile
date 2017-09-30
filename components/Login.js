@@ -1,4 +1,4 @@
-import { View, Text, Button } from 'react-native'
+import { View, Text, Button, Alert } from 'react-native'
 import React, { Component } from 'react'
 
 class Login extends Component {
@@ -7,10 +7,25 @@ class Login extends Component {
     //   permissions: ['public_profile']
     // })
     // if (type === 'success') {
-      const token = 'EAACEdEose0cBAMssGaEMPtynRVK7izJyIZBs9KZAmMLxf7SAVz3WiklAskaRXZA2Nk0c2zyTVJIIVv2BwsALGDMfHqQE1NIZCj5ZCVqzdk3W2eqZCAfx9eLNH34Y3DkMebMOEojMQUX9jQkLbbDoud5Dl2dMVTWecSgdKWW0jFRhsp8ZBHKpJMbuHiqLP2s04RwwITwQYLoYAZDZD'
-      const response = await this.props.mutate({ variables: { token }})
-      this.props.loggedIn(response.data.facebook_login)
+      const token = 'EAACEdEose0cBAL9DmCsvnh5OlNsehZAOPC0I3DMcRARCLi2JLzlms1UcV8DYa0OqqHFw7R8HF7pN3eJJJxvucCatlWP1ljJBBZBZAsxzTf160y5dJDIZCvlGOgiFf95M0CMW3W3uH6tFnM5ZC6A35DVo7ObgeHFjwZAakX6XtuRowRv0rKZCxomgFb23ZAsonEZCZB7dvcXmBRZCAZDZD'
+      const response = await this.props.facebookLoginMutation({ variables: { token }})
+      const user = response.data.facebook_login
+
+      if (!user) {
+        this.loginError()
+      } else {
+        this.props.loggedIn(user)
+      }
     // }
+  }
+
+  loginError() {
+    Alert.alert(
+      'Sign In Error',
+      'There was an error signing in. Please try again.',
+      [{text: 'OK', onPress: () => console.log('OK Pressed')}],
+      { cancelable: false }
+    )
   }
 
   render () {

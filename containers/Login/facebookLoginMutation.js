@@ -1,7 +1,7 @@
 import { gql } from 'react-apollo'
 
-const facebookLoginMutation = gql`
-  mutation facebook_login($token: String!) {
+const FACEBOOK_LOGIN_MUTATION = gql`
+  mutation FacebookLoginMutation($token: String!) {
     facebook_login(token: $token) {
       id
       first_name
@@ -12,4 +12,4 @@ const facebookLoginMutation = gql`
   }
 `
 
-export default facebookLoginMutation
+export default FACEBOOK_LOGIN_MUTATION
