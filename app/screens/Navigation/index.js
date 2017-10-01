@@ -1,19 +1,11 @@
 import React from 'react'
-import { Text } from 'react-native'
 import { TabNavigator } from 'react-navigation'
 import Login from '../Login'
-
-const LoginScreen = () => (
-  <Text>LOGIN</Text>
-)
-
-const HomeScreen = () => (
-  <Text>HOME</Text>
-)
+import Products from '../Products'
 
 const Navigator = TabNavigator({
-  Login: { screen: Login },
-  Home: { screen: HomeScreen }
+  Products: { screen: Products },
+  Login: { screen: Login }
 })
 
 export default Navigator
