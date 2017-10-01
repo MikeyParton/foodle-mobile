@@ -1,5 +1,6 @@
 import { AsyncStorage } from 'react-native'
 import { LOGGED_IN } from './constants'
+import localstorage from '../../../services/localstorage'
 
 const defaultState = {
   currentUser: null
@@ -8,7 +9,7 @@ const defaultState = {
 const loggedIn = (state, action) => {
   const currentUser = action.user
   try {
-    AsyncStorage.setItem('foodle_token', currentUser.token)
+    localstorage.setItem('foodle_token', currentUser.token)
   } catch (error) {
     console.log('error stroring token', error)
   }

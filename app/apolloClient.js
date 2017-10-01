@@ -1,8 +1,9 @@
 import { ApolloClient, createNetworkInterface } from 'react-apollo';
-import { AsyncStorage } from 'react-native'
+import { API_URL } from './config'
+import localstorage from './services/localstorage'
 
 const networkInterface = createNetworkInterface({
-  uri: 'https://c43f86e8.ngrok.io/graphql'
+  uri: API_URL
 })
 
 networkInterface.use([{
@@ -10,7 +11,7 @@ networkInterface.use([{
     if (!req.options.headers) {
       req.options.headers = {}
     }
-    const token = await AsyncStorage.getItem('foodle_token')
+    const token = await localstorage.getItem('foodle_token')
     req.options.headers.authorization = token ? `Bearer ${token}` : null
     next()
   }

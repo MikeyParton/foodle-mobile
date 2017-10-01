@@ -1,17 +1,15 @@
 import React from 'react'
-import Login from './containers/Login'
 // import Search from './components/Search'
-import client from './config/apolloClient'
-import store from './store'
-import Navigator from './Navigator'
+import client from './app/apolloClient'
+import store from './app/store'
+import Navigation from './app/screens/Navigation'
 import { gql, ApolloProvider, graphql } from 'react-apollo';
 
 class App extends React.Component {
   render() {
     return (
       <ApolloProvider store={store} client={client}>
-        {/* <Login /> */}
-        <Navigator />
+        <Navigation />
       </ApolloProvider>
     )
   }

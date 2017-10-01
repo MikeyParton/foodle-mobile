@@ -1,7 +1,7 @@
 import React from 'react'
 import { Text } from 'react-native'
 import { TabNavigator } from 'react-navigation'
-import Login from './containers/Login'
+import Login from '../Login'
 
 const LoginScreen = () => (
   <Text>LOGIN</Text>

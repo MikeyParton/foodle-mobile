@@ -1,9 +1,9 @@
 import React from 'react'
 import { graphql, compose } from 'react-apollo'
-import FACEBOOK_LOGIN_MUTATION from './facebookLoginMutation'
-import Login from '../../components/Login'
 import { connect } from 'react-redux'
-import { loggedIn } from './actions'
+import Login from './components'
+import { loggedIn } from './data/actions'
+import FACEBOOK_LOGIN_MUTATION from './data/facebookLoginMutation'
 
 const mapStateToProps = (state) => ({
   currentUser: state.login.currentUser

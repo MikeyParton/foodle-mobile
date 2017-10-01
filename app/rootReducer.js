@@ -1,6 +1,6 @@
 import { combineReducers } from 'redux'
-import client from './config/apolloClient'
-import login from './containers/Login/reducer'
+import client from './apolloClient'
+import login from './screens/Login/data/reducer'
 
 const rootReducer = combineReducers({
   apollo: client.reducer(),

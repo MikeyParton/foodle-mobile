@@ -2,7 +2,7 @@ import { View, Text, TouchableOpacity, Alert, ActivityIndicator, Animated } from
 import React, { Component } from 'react'
 import Icon from 'react-native-vector-icons/FontAwesome'
 import Spinner from './Spinner'
-import { Screen, Heading, ButtonText, LoginButton, SubHeading } from './ui'
+import { Screen, Heading, ButtonText, LoginButton, SubHeading } from './styled'
 
 class Login extends Component {
   state = {
