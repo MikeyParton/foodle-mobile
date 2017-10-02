@@ -1,10 +1,12 @@
 import { combineReducers } from 'redux'
 import client from './apolloClient'
 import login from './screens/Login/data/reducer'
+import products from './screens/Products/data/reducer'
 
 const rootReducer = combineReducers({
   apollo: client.reducer(),
-  login
+  login,
+  products
 })
 
 export default rootReducer

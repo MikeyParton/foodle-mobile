@@ -1,5 +1,10 @@
 import React from 'react'
 import { TouchableWithoutFeedback, View, Text, Keyboard, Animated } from 'react-native'
+import styled from 'styled-components/native'
+
+const HeaderText = styled.Text`
+  color: white;
+`
 
 class Cancel extends React.Component {
   render(){
@@ -11,7 +16,7 @@ class Cancel extends React.Component {
       <Animated.View style={{maxWidth: width, overflow: 'hidden'}}>
       <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
         <View>
-          <Text numberOfLines={1}>Cancel</Text>
+          <HeaderText numberOfLines={1}>Cancel</HeaderText>
         </View>
       </TouchableWithoutFeedback>
     </Animated.View>

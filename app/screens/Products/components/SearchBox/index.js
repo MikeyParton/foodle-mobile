@@ -17,22 +17,11 @@ const SearchInput = styled.TextInput`
 `
 
 class SearchBox extends React.Component {
-  constructor(props) {
-    super()
-
-    this.state = {
-      query: ''
-    }
-
-    this.handleFocus = this.handleFocus.bind(this)
-    this.handleChange = this.handleChange.bind(this)
-    this.handleBlur = this.handleBlur.bind(this)
-    this.width = new Animated.Value(0)
-  }
+  width = new Animated.Value(0)
 
   handleChange(event) {
-    const query = event.nativeEvent.text
-    this.setState({ query })
+    const newQuery = event.nativeEvent.text
+    this.props.onQueryChange(newQuery)
   }
 
   handleFocus() {
@@ -58,11 +47,12 @@ class SearchBox extends React.Component {
   }
 
   render() {
+    const { query } = this.props
     return (
       <Container>
         <SearchInput
           placeholder="Search for a product"
-          value={this.state.query}
+          value={query}
           onChange={(e) => this.handleChange(e)}
           onFocus={() => this.handleFocus()}
           onBlur={() => this.handleBlur()}
