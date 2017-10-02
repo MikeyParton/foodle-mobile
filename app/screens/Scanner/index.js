@@ -1,19 +1,19 @@
 import React from 'react'
 import { View, Text } from 'react-native'
-// import Camera from 'react-native-camera'
+import Camera from 'react-native-camera'
 
 class Scanner extends React.Component {
   render() {
     return(
-      <View>
-        {/* <Camera
+      <View style={{flex: 1}}>
+        <Camera
           ref={(cam) => {
             this.camera = cam;
           }}
-          style={styles.preview}
+          style={{flex: 1, justifyContent: 'flex-end', alignItems: 'center'}}
           aspect={Camera.constants.Aspect.fill}>
           <Text>Scanner</Text>
-        </Camera> */}
+        </Camera>
       </View>
     )
   }

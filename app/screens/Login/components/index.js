@@ -1,6 +1,6 @@
 import { View, Text, TouchableOpacity, Alert, ActivityIndicator, Animated } from 'react-native'
 import React, { Component } from 'react'
-import Icon from 'react-native-vector-icons/FontAwesome'
+// import Icon from 'react-native-vector-icons/FontAwesome'
 import Spinner from './Spinner'
 import { Screen, Heading, ButtonText, LoginButton, SubHeading } from './styled'
 
@@ -44,17 +44,11 @@ class Login extends Component {
 
   render () {
     const { loggingIn } = this.state
-    let icon
     return (
       <Screen>
         <Heading>Foodle</Heading>
         <SubHeading>Eat Right</SubHeading>
         <LoginButton disabled={loggingIn} onPress={() => this.loginWithFacebook()}>
-          {
-            loggingIn
-              ? <Spinner color={"white"}/>
-              : <Icon name="facebook" color="white"/>
-          }
           <ButtonText>Login with Facebook</ButtonText>
         </LoginButton>
         {
