@@ -28,11 +28,6 @@ const HeaderText = styled.Text`
 class Products extends React.Component {
   constructor(props) {
     super()
-
-    this.state = {
-      active: false
-    }
-
     this.onQueryChange = this.onQueryChange.bind(this)
     this.openScanner = this.openScanner.bind(this)
   }
@@ -42,20 +37,18 @@ class Products extends React.Component {
   }
 
   openScanner() {
-    this.props.navigation.navigate('Scan')
+    this.props.navigation.navigate('Scanner')
   }
 
   render() {
     const { products } = this.props.data
     const { query } = this.props
-    const { active } = this.state
 
     return(
       <View>
         <Header>
           <HeaderText>Products</HeaderText>
           <SearchBox
-            active={active}
             query={query}
             onQueryChange={this.onQueryChange}
           />

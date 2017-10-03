@@ -1,11 +1,22 @@
 import React from 'react'
-import { TabNavigator } from 'react-navigation'
+import { TabNavigator, StackNavigator } from 'react-navigation'
 import Login from '../Login'
-import Products from '../Products'
+import Search from '../Search'
+import Scanner from '../Scanner'
 
-const Navigator = TabNavigator({
-  Products: { screen: Products },
-  Login: { screen: Login }
+const Tabs = TabNavigator({
+  Search: { screen: Search }
 })
 
-export default Navigator
+const Stack = StackNavigator({
+  Main: {
+    screen: Tabs,
+    navigationOptions: { header: null }
+  },
+  Scanner: {
+    getScreen: () => require('../Scanner').default,
+    navigationOptions: { header: null }
+  }
+})
+
+export default Stack
