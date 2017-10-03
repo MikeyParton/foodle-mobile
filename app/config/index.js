@@ -1,1 +1,1 @@
-export const API_URL = 'https://8a0752dc.ngrok.io/graphql'
+export const API_URL = 'https://c8fd06f4.ngrok.io/graphql'
