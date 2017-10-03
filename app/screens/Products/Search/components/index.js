@@ -4,6 +4,16 @@ import styled from 'styled-components/native'
 import SearchBox from './SearchBox'
 import Results from './Results'
 
+export const ScanButton = styled.TouchableOpacity`
+  flex: 0;
+  width: 200px
+  flex-direction: row;
+  align-items: center;
+  background-color: #3b5998;
+  padding: 20px;
+  border-radius: 20px;
+`
+
 const Header = styled.View`
   background-color: ${props => props.theme.primaryLight}
   padding: 50px 20px 20px 20px;
@@ -24,17 +34,21 @@ class Products extends React.Component {
     }
 
     this.onQueryChange = this.onQueryChange.bind(this)
+    this.openScanner = this.openScanner.bind(this)
   }
 
   onQueryChange(newQuery) {
     this.props.updateProductsQuery(newQuery)
   }
 
+  openScanner() {
+    this.props.navigation.navigate('Scan')
+  }
+
   render() {
     const { products } = this.props.data
     const { query } = this.props
     const { active } = this.state
-    console.log('query', query)
 
     return(
       <View>
@@ -47,6 +61,9 @@ class Products extends React.Component {
           />
         </Header>
         { products && <Results results={products} /> }
+        <ScanButton onPress={this.openScanner}>
+          <Text>Scan Barcode</Text>
+        </ScanButton>
       </View>
     )
   }

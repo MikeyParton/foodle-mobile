@@ -1,28 +1,17 @@
-import { connect } from 'react-redux'
-import { graphql } from 'react-apollo'
-import Products from './components'
-import { updateProductsQuery } from './data/actions'
-import PRODUCTS_QUERY from './data/productsQuery'
+import React from 'react'
+import { StackNavigator } from 'react-navigation'
+import Search from './Search'
+import Scanner from './Scanner'
 
-const mapStateToProps = state => {
-  return {
-    query: state.products.query
+const Products = StackNavigator({
+  Search: {
+    screen: Search,
+    navigationOptions: { title: 'Search', header: null }
+  },
+  Scan: {
+    screen: Scanner,
+    navigationOptions: { title: 'Scanner', header: null }
   }
-}
+})
 
-const mapDispatchToProps = dispatch => {
-  return {
-    updateProductsQuery (query) {
-      dispatch(updateProductsQuery(query))
-    }
-  }
-}
-
-const ProfileWithData = graphql(PRODUCTS_QUERY, {
-  options: ({ query }) => ({ variables: { query: query } })
-})(Products)
-
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(ProfileWithData)
+export default Products
