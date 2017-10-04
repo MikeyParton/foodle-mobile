@@ -2,8 +2,23 @@ import React from 'react'
 import { View, Text, Alert } from 'react-native'
 import Camera from 'react-native-camera'
 import styled from 'styled-components/native'
+import Icon from 'react-native-vector-icons/FontAwesome'
 
 const overlayOpacity = 0.5
+
+const Screen = styled.View`
+  flex: 1;
+`
+
+const Close = styled.TouchableOpacity`
+  flex: 0;
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  z-index: 100;
+  background-color: transparent;
+  padding: 15px;
+`
 
 const TopAndBottom = styled.View`
   flex: 1;
@@ -40,6 +55,14 @@ const Instructions = styled.Text`
 `
 
 class Scanner extends React.Component {
+  constructor(props) {
+    super()
+    this.close = this.close.bind(this)
+  }
+  close() {
+    this.props.navigation.navigate('Main')
+  }
+
   onScan(event, bounds) {
     Alert.alert(
       'Barcode Found!',
@@ -50,7 +73,10 @@ class Scanner extends React.Component {
   }
   render() {
     return(
-      <View style={{flex: 1}}>
+      <Screen>
+        <Close onPress={this.close}>
+          <Icon name="times" size={32} color="white"/>
+        </Close>
         <Camera
           ref={(cam) => {this.camera = cam}}
           onBarCodeRead={(event) => this.onScan(event)}
@@ -66,7 +92,7 @@ class Scanner extends React.Component {
           </RectangleRow>
           <TopAndBottom/>
         </Camera>
-      </View>
+      </Screen>
     )
   }
 }
