@@ -6,7 +6,7 @@ import PRODUCT_QUERY from './data/productQuery'
 
 const mapStateToProps = (state, ownProps) => ({
   barcode: ownProps.navigation.state.params.barcode
-}}
+})
 
 const ProductWithData = graphql(PRODUCT_QUERY, {
   options: ({ barcode }) => ({ variables: { barcode: barcode } })
