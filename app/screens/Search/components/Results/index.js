@@ -6,7 +6,7 @@ const Results = (props) => (
   <View>
     <FlatList
       data={props.results}
-      renderItem={({item}) => <ResultItem {...item}></ResultItem>}
+      renderItem={({item}) => <ResultItem viewProduct={props.viewProduct} {...item} />}
       keyExtractor={(item) => item.id}
       contentContainerStyle={{ padding: 20 }}
     />

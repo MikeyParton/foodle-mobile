@@ -5,6 +5,7 @@ const PRODUCTS_QUERY = gql`
     products(query: $query) {
       id
       name
+      barcode
     }
   }
 `

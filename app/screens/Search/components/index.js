@@ -3,6 +3,7 @@ import { Text, View, FlatList } from 'react-native'
 import styled from 'styled-components/native'
 import SearchBox from './SearchBox'
 import Results from './Results'
+import { SearchBar } from 'react-native-elements'
 
 export const ScanButton = styled.TouchableOpacity`
   flex: 0;
@@ -30,6 +31,7 @@ class Products extends React.Component {
     super()
     this.onQueryChange = this.onQueryChange.bind(this)
     this.openScanner = this.openScanner.bind(this)
+    this.viewProduct = this.viewProduct.bind(this)
   }
 
   onQueryChange(newQuery) {
@@ -38,6 +40,10 @@ class Products extends React.Component {
 
   openScanner() {
     this.props.navigation.navigate('Scanner')
+  }
+
+  viewProduct(barcode) {
+    this.props.navigation.navigate('Product', { barcode })
   }
 
   render() {
@@ -53,7 +59,7 @@ class Products extends React.Component {
             onQueryChange={this.onQueryChange}
           />
         </Header>
-        { products && <Results results={products} /> }
+        { products && <Results results={products} viewProduct={this.viewProduct} /> }
         <ScanButton onPress={this.openScanner}>
           <Text>Scan Barcode</Text>
         </ScanButton>
