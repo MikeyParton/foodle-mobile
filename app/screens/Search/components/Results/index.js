@@ -9,7 +9,7 @@ const Results = (props) => (
       renderItem={({item}) => <ResultItem viewProduct={props.viewProduct} {...item} />}
       keyExtractor={(item) => item.id}
       contentContainerStyle={{ padding: 20 }}
-      keyboardShouldPersistTaps={true}
+      keyboardShouldPersistTaps={"always"}
     />
   </View>
 )

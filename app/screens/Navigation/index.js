@@ -24,6 +24,9 @@ const Products = StackNavigator({
       header: null
     }
   }
+}, {
+  initialRouteName: 'Product',
+  initialRouteParams: { barcode: "9310055536333" }
 })
 
 const Main = TabNavigator({
