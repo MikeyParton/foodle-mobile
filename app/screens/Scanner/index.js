@@ -3,12 +3,9 @@ import { View, Text, Alert } from 'react-native'
 import Camera from 'react-native-camera'
 import styled from 'styled-components/native'
 import Icon from 'react-native-vector-icons/FontAwesome'
+import { Screen } from '../../components/UI'
 
 const overlayOpacity = 0.5
-
-const Screen = styled.View`
-  flex: 1;
-`
 
 const Close = styled.TouchableOpacity`
   flex: 0;

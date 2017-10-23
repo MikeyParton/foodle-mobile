@@ -1,9 +1,8 @@
 import React from 'react'
-import { View, Text, Image } from 'react-native'
+import { View, Text, Image, ScrollView } from 'react-native'
 import styled from 'styled-components/native'
-import ContentContainer from '../../../components/ContentContainer'
-import Heading from '../../../components/Heading'
-import Subheading from '../../../components/SubHeading'
+import { ContentContainer, Heading, SubHeading } from '../../../components/UI'
+import { List, ListItem } from 'react-native-elements'
 
 const Hero = styled.Image`
   height: 200px;
@@ -16,8 +15,12 @@ ProductContent = (props) => (
     <Hero
       source={{uri: 'https://dummyimage.com/400x200/000/fff.png'}}
     />
-    <Heading>{props.name}</Heading>
-    { props.brands.map((brand) => <Text>{brand.name}</Text>) }
+    <Heading>{props.brands[0].name} {props.name}</Heading>
+    <ScrollView>
+      <List>
+        { props.ingredients.map((ingredient, i) => <ListItem key={i} title={ingredient.name} />) }
+      </List>
+    </ScrollView>
   </ContentContainer>
 )
 

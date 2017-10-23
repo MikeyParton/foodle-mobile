@@ -4,4 +4,5 @@ import styled from 'styled-components/native'
 export default styled.Text`
   color: black
   font-size: 20px
+  margin-bottom: 7px
 `

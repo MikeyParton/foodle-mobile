@@ -1,9 +1,6 @@
 import React from 'react'
-
 import { View } from 'react-native'
-import Header from '../../../components/Header'
-import BackButton from '../../../components/BackButton'
-import Title from '../../../components/Title'
+import { Header, BackButton, Title } from '../../../components/UI'
 
 const ProductHeader = (props) => {
   return (

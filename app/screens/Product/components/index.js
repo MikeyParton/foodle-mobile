@@ -2,7 +2,7 @@ import React from 'react'
 import { View, Text, TouchableOpacity } from 'react-native'
 import styled from 'styled-components/native'
 
-import Screen from '../../../components/Screen'
+import { Screen } from '../../../components/UI'
 import ProductHeader from './ProductHeader'
 import ProductContent from './ProductContent'
 

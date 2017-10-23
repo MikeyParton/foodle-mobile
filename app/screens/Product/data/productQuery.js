@@ -7,6 +7,10 @@ const PRODUCT_QUERY = gql`
       name
       brands {
         name
+        id
+      }
+      ingredients {
+        name
       }
     }
   }
