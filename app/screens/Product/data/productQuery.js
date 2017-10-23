@@ -5,6 +5,9 @@ const PRODUCT_QUERY = gql`
     product(barcode: $barcode) {
       id
       name
+      brands {
+        name
+      }
     }
   }
 `

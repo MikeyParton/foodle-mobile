@@ -1,7 +1,10 @@
 import React from 'react'
 import { View, Text, TouchableOpacity } from 'react-native'
-import ProductHeader from './ProductHeader'
 import styled from 'styled-components/native'
+
+import Screen from '../../../components/Screen'
+import ProductHeader from './ProductHeader'
+import ProductContent from './ProductContent'
 
 
 class Product extends React.Component {
@@ -15,17 +18,14 @@ class Product extends React.Component {
   }
 
   render() {
-    const { product = {} } = this.props.data
+    const { product } = this.props.data
+    const title = product ? product.name : ""
 
     return(
-      <View>
-        <ProductHeader product={product} onBack={this.onBack}/>
-        {
-          product && <View>
-            <Text>{product.name}</Text>
-          </View>
-        }
-      </View>
+      <Screen>
+        <ProductHeader title={title} onBack={this.onBack}/>
+        { product && <ProductContent {...product}/> }
+      </Screen>
     )
   }
 }
