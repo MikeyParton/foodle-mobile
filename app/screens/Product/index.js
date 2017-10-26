@@ -1,7 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { graphql, compose } from 'react-apollo'
-import Product from './components'
+import Product from './components/ProductContent'
 import PRODUCT_QUERY from './data/productQuery'
 
 const mapStateToProps = (state, ownProps) => ({
