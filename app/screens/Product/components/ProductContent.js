@@ -1,20 +1,20 @@
 import React from 'react'
 import { View, Text, Image, ScrollView, Animated, StatusBar } from 'react-native'
-import styled from 'styled-components/native'
 import { Screen, Heading, SubHeading, Header, BackButton, Title } from '../../../components/UI'
-import { List, ListItem } from 'react-native-elements'
 import EStyleSheet from 'react-native-extended-stylesheet'
 import LinearGradient from 'react-native-linear-gradient'
 
-const MAX_HEIGHT = 250
-const MIN_HEIGHT = 75
+const TAB_HEIGHT = 30
+const MAX_HEIGHT = 250 + TAB_HEIGHT
+const MIN_HEIGHT = 75 + TAB_HEIGHT
 const SCROLL_DISTANCE = MAX_HEIGHT - MIN_HEIGHT
+
 
 styles = EStyleSheet.create({
   scroll: {
     flex: 1,
   },
-  scrollViewContent: {
+  scrollContent: {
     marginTop: MAX_HEIGHT,
     position: 'relative'
   },
@@ -32,9 +32,10 @@ styles = EStyleSheet.create({
     top: 0,
     left: 0,
     right: 0,
+    bottom: TAB_HEIGHT,
     width: null,
-    minHeight: MAX_HEIGHT,
-    height: '100%',
+    minHeight: MAX_HEIGHT - TAB_HEIGHT,
+    paddingBottom: TAB_HEIGHT,
     resizeMode: 'cover',
   },
   overlayContainer: {
@@ -47,7 +48,7 @@ styles = EStyleSheet.create({
     backgroundColor: 'transparent'
   },
   linearGradient: {
-    height: '100%',
+    height: 100,
     width: '100%',
     backgroundColor: 'transparent'
   },
@@ -66,19 +67,36 @@ styles = EStyleSheet.create({
     backgroundColor: 'transparent',
     zIndex: 500
   },
+  tabs: {
+    position: 'absolute',
+    bottom: 0,
+    width: '100%',
+    height: 30,
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-around',
+    backgroundColor: '#E9E9EF',
+    borderBottomColor: '#989898',
+    borderBottomWidth: 1
+  },
+  listItem: {
+    padding: 20,
+    backgroundColor: 'white'
+  }
 })
 
-class ProductContent extends React.Component {
-  constructor(props) {
-    super()
-    this.state = {
-      scrollY: new Animated.Value(0)
-    }
+const Ingredient = (props) => (
+  <View style={styles.listItem}>
+    <Text>{props.name}</Text>
+  </View>
+)
 
-    this.onBack = this.onBack.bind(this)
+class ProductContent extends React.Component {
+  state = {
+    scrollY: new Animated.Value(0)
   }
 
-  onBack () {
+  onBack = () => {
     this.props.navigation.navigate('Search')
   }
 
@@ -111,6 +129,10 @@ class ProductContent extends React.Component {
     const title = product ? product.name : ""
     const ingredients = product ? product.ingredients : []
 
+    const onScroll= Animated.event([
+      { nativeEvent: { contentOffset: { y: this.state.scrollY } } }
+    ])
+
     return (
       <Screen>
         <StatusBar barStyle='light-content' />
@@ -118,24 +140,15 @@ class ProductContent extends React.Component {
           showsVerticalScrollIndicator={false}
           style={styles.scroll}
           scrollEventThrottle={16}
-          onScroll={Animated.event([ { nativeEvent: { contentOffset: { y: this.state.scrollY } } } ]) }>
-          <View style={styles.scrollViewContent}>
-            <Text style={{ position: 'absolute', top: 0 }}>Ingredients</Text>
-            <List style={{ marginTop: 20 }}>
-              { ingredients.map((ingredient, i) => <ListItem key={i} title={ingredient.name} />) }
-            </List>
+          onScroll={onScroll}>
+          <View style={styles.scrollContent}>
+            { ingredients.map((ingredient, index) => <Ingredient key={index} {...ingredient}/>) }
           </View>
         </ScrollView>
         <Animated.View
-          style={[
-            styles.hero,
-            { height: heroHeight }
-          ]}>
+          style={[styles.hero, { height: heroHeight }]}>
           <Animated.Image
-            style={[
-              styles.backgroundImage,
-              { transform: [{ translateY: imageTranslate }], opacity: imageOpacity }
-            ]}
+            style={[styles.backgroundImage, { transform: [{ translateY: imageTranslate }], opacity: imageOpacity }]}
             source={{uri: 'https://i.ytimg.com/vi/MTXFeIKEQ-g/maxresdefault.jpg'}}/>
           <Animated.View style={[styles.overlayContainer], { opacity: overlayOpacity }}>
             <LinearGradient  colors={["black", "transparent"]} locations={[0.5, 1]} style={styles.linearGradient}/>
@@ -144,6 +157,10 @@ class ProductContent extends React.Component {
             <BackButton onBack={this.onBack} />
             <Title>{title}</Title>
             <View/>
+          </View>
+          <View style={styles.tabs}>
+            <Text>ingredients</Text>
+            <Text>nutrients</Text>
           </View>
         </Animated.View>
       </Screen>
