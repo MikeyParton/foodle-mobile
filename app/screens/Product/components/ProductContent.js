@@ -1,8 +1,13 @@
 import React from 'react'
-import { View, Text, Image, ScrollView, Animated, StatusBar } from 'react-native'
+import { NavigationActions } from 'react-navigation';
+import { View, Text, Image, ScrollView, Animated, StatusBar, TouchableOpacity } from 'react-native'
 import { Screen, Heading, SubHeading, Header, BackButton, Title } from '../../../components/UI'
 import EStyleSheet from 'react-native-extended-stylesheet'
 import LinearGradient from 'react-native-linear-gradient'
+import ProductNav from './ProductNav'
+import { addNavigationHelpers } from 'react-navigation'
+
+console.log('do i have it ?', ProductNav)
 
 const TAB_HEIGHT = 30
 const MAX_HEIGHT = 250 + TAB_HEIGHT
@@ -78,18 +83,8 @@ styles = EStyleSheet.create({
     backgroundColor: '#E9E9EF',
     borderBottomColor: '#989898',
     borderBottomWidth: 1
-  },
-  listItem: {
-    padding: 20,
-    backgroundColor: 'white'
   }
 })
-
-const Ingredient = (props) => (
-  <View style={styles.listItem}>
-    <Text>{props.name}</Text>
-  </View>
-)
 
 class ProductContent extends React.Component {
   state = {
@@ -142,7 +137,7 @@ class ProductContent extends React.Component {
           scrollEventThrottle={16}
           onScroll={onScroll}>
           <View style={styles.scrollContent}>
-            { ingredients.map((ingredient, index) => <Ingredient key={index} {...ingredient}/>) }
+            <ProductNav ref={navigatorRef => this.navigator = navigatorRef} something={'something'} />
           </View>
         </ScrollView>
         <Animated.View
@@ -159,8 +154,14 @@ class ProductContent extends React.Component {
             <View/>
           </View>
           <View style={styles.tabs}>
-            <Text>ingredients</Text>
-            <Text>nutrients</Text>
+            <TouchableOpacity
+              onPress={() => this.navigator.dispatch(NavigationActions.navigate({ routeName: 'Ingredients'}))}>
+              <Text>Ingredients</Text>
+            </TouchableOpacity>
+            <TouchableOpacity
+              onPress={() => this.navigator.dispatch(NavigationActions.navigate({ routeName: 'Nutrients'}))}>
+              <Text>Nutrients</Text>
+            </TouchableOpacity>
           </View>
         </Animated.View>
       </Screen>
