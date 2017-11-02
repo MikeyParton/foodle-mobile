@@ -1,13 +1,10 @@
 import React from 'react'
-import { NavigationActions } from 'react-navigation';
 import { View, Text, Image, ScrollView, Animated, StatusBar, TouchableOpacity } from 'react-native'
 import { Screen, Heading, SubHeading, Header, BackButton, Title } from '../../../components/UI'
 import EStyleSheet from 'react-native-extended-stylesheet'
 import LinearGradient from 'react-native-linear-gradient'
-import ProductNav from './ProductNav'
-import { addNavigationHelpers } from 'react-navigation'
-
-console.log('do i have it ?', ProductNav)
+import ProductIngredients from './ProductIngredients'
+import ProductNutrients from './ProductNutrients'
 
 const TAB_HEIGHT = 30
 const MAX_HEIGHT = 250 + TAB_HEIGHT
@@ -88,7 +85,8 @@ styles = EStyleSheet.create({
 
 class ProductContent extends React.Component {
   state = {
-    scrollY: new Animated.Value(0)
+    scrollY: new Animated.Value(0),
+    tabIndex: 2
   }
 
   onBack = () => {
@@ -120,13 +118,15 @@ class ProductContent extends React.Component {
       extrapolate: 'clamp'
     })
 
-    const { product } = this.props.data
-    const title = product ? product.name : ""
-    const ingredients = product ? product.ingredients : []
-
     const onScroll= Animated.event([
       { nativeEvent: { contentOffset: { y: this.state.scrollY } } }
     ])
+
+    const { product } = this.props.data
+    const { tabIndex } = this.state
+    const title = product ? product.name : ""
+    const ingredients = product ? product.ingredients : []
+    const nutrients = product ? product.nutrients : null
 
     return (
       <Screen>
@@ -137,7 +137,8 @@ class ProductContent extends React.Component {
           scrollEventThrottle={16}
           onScroll={onScroll}>
           <View style={styles.scrollContent}>
-            <ProductNav ref={navigatorRef => this.navigator = navigatorRef} something={'something'} />
+            { tabIndex == 1 && <ProductIngredients ingredients={ingredients}/> }
+            { tabIndex == 2 && <ProductNutrients {...nutrients}/> }
           </View>
         </ScrollView>
         <Animated.View
@@ -155,11 +156,11 @@ class ProductContent extends React.Component {
           </View>
           <View style={styles.tabs}>
             <TouchableOpacity
-              onPress={() => this.navigator.dispatch(NavigationActions.navigate({ routeName: 'Ingredients'}))}>
+              onPress={() => this.setState({ tabIndex: 1 })}>
               <Text>Ingredients</Text>
             </TouchableOpacity>
             <TouchableOpacity
-              onPress={() => this.navigator.dispatch(NavigationActions.navigate({ routeName: 'Nutrients'}))}>
+              onPress={() => this.setState({ tabIndex: 2 })}>
               <Text>Nutrients</Text>
             </TouchableOpacity>
           </View>

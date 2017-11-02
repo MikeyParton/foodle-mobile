@@ -10,7 +10,7 @@ const mapStateToProps = (state, ownProps) => ({
 })
 
 const ProductWithData = graphql(PRODUCT_QUERY, {
-  options: ({ barcode }) => ({ variables: { barcode: barcode } })
+  options: ({ barcode }) => ({ variables: { barcode: barcode, serving: null } })
 })(Product)
 
 export default connect(
