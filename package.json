@@ -16,6 +16,11 @@
   "jest": {
     "preset": "jest-expo"
   },
+  "rnpm": {
+    "assets": [
+      "./assets/fonts/"
+    ]
+  },
   "dependencies": {
     "lodash": "^4.17.4",
     "react": "16.0.0-alpha.12",
@@ -25,7 +30,7 @@
     "react-native-config": "^0.9.0",
     "react-native-elements": "^0.17.0",
     "react-native-extended-stylesheet": "^0.7.0",
-    "react-native-fbsdk": "^0.6.1",
+    "react-native-fbsdk": "git+https://github.com/koenpunt/react-native-fbsdk.git",
     "react-native-linear-gradient": "^2.3.0",
     "react-native-vector-icons": "^4.4.2",
     "react-navigation": "^1.0.0-beta.11",

@@ -5,7 +5,8 @@ import styled from 'styled-components/native'
 const Table = styled.View`
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
+  justify-content: center;
+  flex-wrap: wrap;
 `
 
 const Cell = styled.View`
@@ -16,10 +17,12 @@ const Cell = styled.View`
 const Title = styled.Text`
   font-size: 16px;
   text-align: center;
+  font-family: ${props => props.theme.mediumFont}
 `
 
 const Label = styled.Text`
   text-align: center;
+  font-family: ${props => props.theme.thinFont}
 `
 
 
@@ -37,14 +40,24 @@ const ProductNutrients = (props) => {
     proteins_value,
     proteins_unit,
     fat_value,
-    fat_unit
+    fat_unit,
+    sugars_value,
+    sugars_unit,
+    carbohydrates_value,
+    carbohydrates_unit,
+    sodium_value,
+    sodium_unit
   } = props
+
   return (
     <View style={{flex: 1}}>
       <Table>
         <Nutrient label={'Energy'} value={energy_value} unit={energy_unit}/>
         <Nutrient label={'Protein'} value={proteins_value} unit={proteins_unit}/>
+        <Nutrient label={'Carbohydrates'} value={carbohydrates_value} unit={carbohydrates_unit}/>
+        <Nutrient label={'Sodium'} value={sodium_value} unit={sodium_unit}/>
         <Nutrient label={'Fat'} value={fat_value} unit={fat_unit}/>
+        <Nutrient label={'Sugar'} value={sugars_value} unit={sugars_unit}/>
       </Table>
     </View>
   )

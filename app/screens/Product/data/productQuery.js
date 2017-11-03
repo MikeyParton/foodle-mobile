@@ -19,6 +19,12 @@ const PRODUCT_QUERY = gql`
         proteins_unit
         fat_value
         fat_unit
+        sugars_value
+        sugars_unit
+        carbohydrates_value
+        carbohydrates_unit
+        sodium_value
+        sodium_unit
       }
     }
   }
